@@ -1,0 +1,85 @@
+{
+  "name": "@jarrodek/debug",
+  "version": "1.0.0",
+  "description": "A port of the debug library that is an ESM and works in a web browser",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jarrodek/debug.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jarrodek/debug/issues"
+  },
+  "license": "Apache-2.0",
+  "author": "Pawel Uchida-Psztyc",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run clean && npm run build",
+    "prepare": "husky",
+    "test": "npm run build && wtr --playwright --browsers chromium --browsers webkit",
+    "test:watch": "npm run build && wtr --watch",
+    "test:chrome": "npm run build && wtr --playwright --browsers chromium",
+    "test:firefox": "npm run build && wtr --playwright --browsers firefox",
+    "test:webkit": "npm run build && wtr --playwright --browsers webkit",
+    "test:all": "npm run build && wtr --playwright --browsers chromium firefox webkit",
+    "lint": "npm run lint:eslint && npm run lint:prettier",
+    "lint:eslint": "eslint --color --cache --cache-location .eslintcache .",
+    "lint:prettier": "prettier \"**/*.ts\" --check",
+    "format:eslint": "eslint --color --cache --fix --cache-location .eslintcache .",
+    "format:prettier": "prettier \"**/*.ts\" --write",
+    "format": "npm run format:eslint && npm run format:prettier"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^21.0.0",
+    "@commitlint/config-conventional": "^21.0.0",
+    "@eslint/compat": "^2.0.0",
+    "@eslint/js": "^10.0.1",
+    "@esm-bundle/chai": "^4.3.4",
+    "@pawel-up/semver": "^0.1.4",
+    "@types/chai-as-promised": "^8.0.2",
+    "@types/mocha": "^10.0.10",
+    "@web/dev-server-esbuild": "^1.0.2",
+    "@web/test-runner": "^0.20.2",
+    "@web/test-runner-playwright": "^0.11.0",
+    "chai-as-promised": "^8.0.2",
+    "conventional-changelog": "^7.2.0",
+    "conventional-changelog-conventionalcommits": "^9.3.0",
+    "esbuild": "^0.28.0",
+    "eslint": "^10.0.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-no-only-tests": "^3.3.0",
+    "eslint-plugin-prettier": "^5.5.4",
+    "globals": "^17.3.0",
+    "husky": "^9.1.7",
+    "prettier": "^3.7.3",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.48.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix"
+    ],
+    "*.ts": [
+      "eslint --fix"
+    ]
+  }
+}
