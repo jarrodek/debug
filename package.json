@@ -4,7 +4,7 @@
   "description": "A port of the debug library that is an ESM and works in a web browser",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jarrodek/debug.git"
+    "url": "git+https://github.com/jarrodek/debug.git"
   },
   "bugs": {
     "url": "https://github.com/jarrodek/debug/issues"
